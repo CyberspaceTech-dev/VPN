@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>VPN Messaging App</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f4f6f9;
+      text-align: center;
+      padding: 30px;
+    }
+    .card {
+      background: white;
+      max-width: 500px;
+      margin: auto;
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+    h1 {
+      color: #333;
+    }
+    button {
+      background: #007bff;
+      color: white;
+      border: none;
+      padding: 12px 20px;
+      margin: 10px;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+    button:hover {
+      background: #0056b3;
+    }
+    textarea, input, select {
+      width: 100%;
+      padding: 10px;
+      margin: 8px 0;
+      border: 1px solid #ddd;
+      border-radius: 6px;
+    }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <h1>VPN Messaging App</h1>
+
+    <button onclick="connectVPN()">🔒 Connect VPN</button>
+    <p id="vpn-status">VPN Status: Disconnected</p>
+
+    <h3>Send Bulk Messages</h3>
+    <textarea id="message" placeholder="Enter your message here..."></textarea>
+    <input id="numbers" placeholder="Enter up to 20 numbers separated by commas e.g. 2547xxxx,2547yyyy">
+
+    <select id="network">
+      <option value="safaricom">Safaricom</option>
+      <option value="airtel">Airtel</option>
+      <option value="whatsapp">WhatsApp</option>
+    </select>
+
+    <button onclick="sendMessages()">📩 Send Messages</button>
+
+    <p id="status"></p>
+  </div>
+
+  <script>
+    function connectVPN() {
+      document.getElementById("vpn-status").innerText = "VPN Status: Connected ✅";
+    }
+
+    function sendMessages() {
+      const message = document.getElementById("message").value;
+      const numbers = document.getElementById("numbers").value.split(",");
+      const network = document.getElementById("network").value;
+
+      if (!message || numbers.length === 0) {
+        alert("Please enter a message and at least one number.");
+        return;
+      }
+
+      document.getElementById("status").innerText =
+        Sending "${message}" to ${numbers.length} people via ${network.toUpperCase()}...;
+
+      // 🔹 Later, this will send data to your backend (Safaricom, Airtel, WhatsApp APIs)
+      console.log({ message, numbers, network });
+    }
+  </script>
+</body>
+</html>
